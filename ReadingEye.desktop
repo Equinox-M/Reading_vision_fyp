@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=ReadingEye
+Comment=Reading vision
+Icon=gnome-info
+Exec=env GOOGLE_APPLICATION_CREDENTIALS=/home/okami/Reading_vision_fyp/filename.json GCLOUD_PROJECT=fyp2-339312 python3 /home/okami/Reading_vision_fyp/main.py
+Terminal=true
+Type=Application
+Categories=
+
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=0
