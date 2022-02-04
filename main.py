@@ -1,7 +1,7 @@
-# USAGE
+
 # python3 main.py
 
-# import the necessary python modules
+# importing the necessary python modules for the application
 from page_transform.transform import four_point_transform
 from skimage.filters import threshold_local
 from time import sleep
