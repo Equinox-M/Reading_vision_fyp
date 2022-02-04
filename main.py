@@ -35,8 +35,8 @@ import time
 import shutil
 
 # Extract GCP project id variable to connect to Google Cloud
-PROJECT_ID = os.environ.get('GCLOUD_PROJECT')
-USERNAME = os.environ.get('USERNAME')
+PROJECT_ID = os.environ.get('fyp2-339312')
+USERNAME = os.environ.get('okami')
 
 # Recognizes text in a image file using Google's Vision API
 def cloud_recognize_text(infile):
@@ -104,9 +104,9 @@ def cloud_text_to_speech(text, outfile):
 # recognized text into speech using Google's Text-to-Speech API. Speak the text.
 def cloud_read():
     # Photo from which to extract text
-    infile = os.path.join("/home" , USERNAME, "Reading_Eye_For_The_Blind", "images", "picture.png")
+    infile = os.path.join("/home" , USERNAME, "Reading_vision_fyp", "images", "picture.png")
     # Name of file that will hold synthetic speech
-    outfile = os.path.join("/home" , USERNAME, "Reading_Eye_For_The_Blind", "read.mp3")
+    outfile = os.path.join("/home" , USERNAME, "Reading_vision_fyp", "read.mp3")
 
     # Recognize text in the input image
     text = str(cloud_recognize_text(infile))
@@ -219,8 +219,8 @@ def edge_split_handwritten_lines():
     print("Splitting")
 
     # Define source for input image and output images
-    pn_SRC = os.path.join("/home" , USERNAME, "Reading_Eye_For_The_Blind","images")
-    pn_OUT = os.path.join("/home" , USERNAME, "Reading_Eye_For_The_Blind", "outes")
+    pn_SRC = os.path.join("/home" , USERNAME, "Reading_vision_fyp","images")
+    pn_OUT = os.path.join("/home" , USERNAME, "Reading_vision_fyp", "outes")
 
     # Split handwritten text
     images = sorted(glob(os.path.join(pn_SRC, "*.png")))
@@ -235,9 +235,9 @@ def edge_recognize_handwritten_text():
 
     # Define source for handwritten text recognition model and image
     # of text to recognize
-    output_path = os.path.join("/home" , USERNAME, "Reading_Eye_For_The_Blind", "model", "iam", "flor")
+    output_path = os.path.join("/home" , USERNAME, "Reading_vision_fyp", "model", "iam", "flor")
     target_path = os.path.join(output_path, "checkpoint_weights.hdf5")
-    images_path = os.path.join("/home" , USERNAME, "Reading_Eye_For_The_Blind", "outes", "picture.png")
+    images_path = os.path.join("/home" , USERNAME, "Reading_vision_fyp", "outes", "picture.png")
 
     # Define input size, number max of chars per line and list of valid chars
     # (0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&'
@@ -290,9 +290,9 @@ def edge_print_read():
     # First, try to recognized text from a page. If no page was detected,
     # then recognize text from a book
     try:
-        edge_recognize_printed_page("/home/" + USERNAME + "/Reading_Eye_For_The_Blind/images/picture.png")
+        edge_recognize_printed_page("/home/" + USERNAME + "/Reading_vision_fyp/images/picture.png")
     except:
-        edge_recognize_printed_book("/home/" + USERNAME + "/Reading_Eye_For_The_Blind/images/picture.png")
+        edge_recognize_printed_book("/home/" + USERNAME + "/Reading_vision_fyp/images/picture.png")
 
 # Recognized handwritten text on the edge
 def edge_handwritten_read():
@@ -343,7 +343,7 @@ def gstreamer_pipeline(
     display_width=720,
     display_height=1280,
     framerate=60,
-    flip_method=3,
+    flip_method=0,
 ):
     return (
         "nvarguscamerasrc ! "
@@ -366,7 +366,7 @@ def gstreamer_pipeline(
 
 # Take a picture using the camera
 def take_picture():
-    # Define parameters to correct for fisheye effect due to wide angle lens
+    # Define parameters to correct for fisheye effect due to wide angle lens(wide lens is used for better image quality)
     DIM = (720, 1280)
     K = np.array([[575.3324407171685, 0.0, 326.96106949050466],
                   [0.0, 571.9331100336262, 648.1857918423042], [0.0, 0.0, 1.0]])
